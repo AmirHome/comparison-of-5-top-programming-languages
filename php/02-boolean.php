@@ -2,29 +2,36 @@
 
 declare(strict_types=1);
 
+
+<?php
 class AnnalynsInfiltration
 {
-    // Task 1: Check if a fast attack can be made
-    public static function CanFastAttack($knightIsAwake) {
-        return !$knightIsAwake;
+    public function canFastAttack($is_knight_awake)
+    {
+        return !$is_knight_awake;
     }
 
-    // Task 2: Check if the group can be spied upon
-    public static function CanSpy($knightIsAwake, $archerIsAwake, $prisonerIsAwake) {
-        return $knightIsAwake || $archerIsAwake || $prisonerIsAwake;
+    public function canSpy(
+        $is_knight_awake,
+        $is_archer_awake,
+        $is_prisoner_awake
+    ) {
+        return $is_knight_awake || $is_archer_awake || $is_prisoner_awake;
     }
 
-    // Task 3: Check if the prisoner can be signalled
-    public static function CanSignalPrisoner($archerIsAwake, $prisonerIsAwake) {
-        return !$archerIsAwake && $prisonerIsAwake;
+    public function canSignal(
+        $is_archer_awake,
+        $is_prisoner_awake
+    ) {
+        return $is_prisoner_awake && !$is_archer_awake;
     }
 
-    // Task 4: Check if the prisoner can be freed
-    public static function CanFreePrisoner($knightIsAwake, $archerIsAwake, $prisonerIsAwake, $petDogIsPresent) {
-        if ($petDogIsPresent) {
-            return !$archerIsAwake && $prisonerIsAwake;
-        } else {
-            return !$knightIsAwake && !$archerIsAwake && $prisonerIsAwake;
-        }
+       public function canLiberate(
+        $is_knight_awake,
+        $is_archer_awake,
+        $is_prisoner_awake,
+        $is_dog_present
+    ) {
+         return  (!$is_knight_awake && !$is_archer_awake && $is_prisoner_awake) || ($is_dog_present && !$is_archer_awake);
     }
 }
